@@ -3,3 +3,6 @@ bin_old/
 doc/
 hs_err_pid*
 /target/
+.classpath
+.project
+dependency-reduced-pom.xml
