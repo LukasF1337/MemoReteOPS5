@@ -1,0 +1,5 @@
+bin/
+bin_old/
+doc/
+hs_err_pid*
+/target/

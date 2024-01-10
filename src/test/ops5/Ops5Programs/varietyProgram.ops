@@ -1,0 +1,39 @@
+;program meant for testing purposes. It uses many cases
+
+(strategy lex)
+
+(literalize car
+    speed
+    mileage
+    age)
+(literalize country
+    name
+    age)
+(literalize number
+    value
+    value2
+    value3)
+(literalize uninitialized
+    value
+    value2
+    value3)
+
+(startup
+        (make car ^speed 150 ^mileage 5252 ^age 24)
+        (make car ^speed 110 ^mileage 561 ^age 11)
+        (make car ^speed 160 ^mileage 4321 ^age 15)
+        (make country ^name germany ^age 3214)
+        (make country ^name austria ^age 9876)
+        (make country ^name italy ^age 6543)
+        (make number ^value 1   ^value2 3)
+        (make number ^value 1.1 ^value2 2)
+        (make number ^value 2   ^value2 2.5)
+        (make number ^value 2.2 ^value2 3.5)
+        (make number ^value 3   ^value2 10)
+        (make number ^value 3)
+        (make number ^value 3)
+        (make number ^value 3.3)
+        (make number ^value 4 ^value2 4)
+        (make number)
+)
+

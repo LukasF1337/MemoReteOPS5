@@ -1,0 +1,171 @@
+(literalize robot
+	name  ;das     ist ein Kommentar test: !"#$§%&'()*+,-./:;<=>?@[\]^_`{|}~
+	type
+	velocity
+	position
+	goal
+
+	counted
+	scheduled
+)
+
+(literalize pose
+	name
+	x
+	y
+	theta
+	isgoal
+	isscheduled
+)
+
+(literalize counter 
+	value)
+
+(literalize sequence
+	number)
+
+(startup
+	(make robot ^name at1 ^type Pioneer-AT ^velocity 0 
+               	    ^position pat1 ^goal gat1)
+	(make pose ^name pat1 ^x 1000 ^y 2000 ^theta 20)
+	(make pose ^name gat1 ^x 1000 ^y 2000 ^theta 20 ^isgoal true)
+
+	(make robot ^name at2 ^type Pioneer-AT ^velocity 100
+               	    ^position pat2 ^goal gat2)
+	(make pose ^name pat2 ^x -1000 ^y -7000 ^theta -150)
+	(make pose ^name gat2 ^x -800 ^y 300 ^theta -90 ^isgoal true)
+
+	(make robot ^name dx1 ^type Pioneer-DX ^velocity 200
+               	    ^position pdx1 ^goal gdx1)
+	(make pose ^name pdx1 ^x 1000 ^y -2000 ^theta 90)
+	(make pose ^name gdx1 ^x 3000 ^y 0 ^theta 90 ^isgoal true)
+
+	(make robot ^name dx2 ^type Pioneer-DX ^velocity 200
+               	    ^position pdx2 ^goal gdx2)
+	(make pose ^name pdx2 ^x 1000 ^y -3000 ^theta 90)
+	(make pose ^name gdx2 ^x 200 ^y 200 ^theta 0 ^isgoal true)
+
+	(make robot ^name pb1 ^type Powerbot ^velocity 0
+               	    ^position ppb1 ^goal gpb1)
+	(make pose ^name ppb1 ^x 5000 ^y 2000 ^theta 0)
+	(make pose ^name gpb1 ^x 2000 ^y -500 ^theta -30 ^isgoal true)
+
+	(make robot ^name pb2 ^type Powerbot ^velocity -100
+               	    ^position ppb2 ^goal gpb2)
+	(make pose ^name ppb2 ^x 6000 ^y 2000 ^theta 180)
+	(make pose ^name gpb2 ^x 1000 ^y 1000 ^theta 0 ^isgoal true)
+)
+
+(p b
+	(robot 	 ^name <na>
+		^type Pioneer-AT)
+--> (write |robot | <na> | of type Pioneer-AT | (CRLF))
+)
+		
+(p c
+	(robot 	^name <na>
+		^type Powerbot
+		^velocity <> 0 
+		^velocity <vel> )
+--> (write |Powerbot | <na> | moving with | <vel> | mm/s | (CRLF))
+)
+		
+(p d1
+	(robot 	^name <na> ^position <po>)
+        (pose 	^name <po> 
+		^x > 2000 
+		^x <x> )
+--> (write |robot | <na> | pose-x | <x> (CRLF))
+)
+
+(p d2
+	(robot 	^name <na> ^position <po>)
+        (pose 	^name <po> 
+		^x < -2000 
+		^x <x> )
+--> (write |robot | <na> | pose-x | <x> (CRLF))
+)
+
+(p e
+	(robot  ^name <na1>
+		^type Pioneer-AT
+		^goal <go1>
+		^counted <> NIL)
+        (pose 	^name <go1> 
+		^theta <th1>)
+	(robot  ^name <> <na1> 
+		^name <na2>
+		^type Pioneer-AT
+		^goal <go2>
+		^counted <> NIL)
+        (pose 	^name <go2> 
+		^theta < <th1> 
+		^theta <th2> )
+--> (write |delta heading from robot | <na1> | to robot | <na2> |: |)
+    (write (compute <th1> - <th2>) | deg |)
+    (write (CRLF))
+)
+
+(p f
+	(robot 	^name <na> 
+		^velocity <vel> )
+	-(robot	^velocity > <vel> )
+--> (write |robot | <na> | is one of the fastest | (CRLF))
+)
+
+(p g1
+	{ <rob> (robot ^counted <> true )}
+        -(counter) 
+--> (modify <rob> ^counted true )
+    (make counter ^value 1)
+)
+
+(p g2
+	{ <rob> (robot ^counted <> true )}
+        { <count> (counter ^value <val> ) }
+--> (modify <rob> ^counted true )
+    (modify <count> ^value (compute <val> + 1))
+)
+
+(p g3
+       { <count> (counter ^value <val> ) }
+	-(robot ^counted <> true)
+--> (write |there are | <val> | robots |)
+    (write (CRLF))
+    (remove <count>)
+)
+ 	
+(p h1
+	{ <rob> (robot  ^name <na1>
+			^position <po1>
+			^scheduled NIL )}
+    { <po>    (pose 	^name <po1> 
+		^x <x1>)}
+	-(pose ^isgoal NIL 
+			^x < <x1>)
+    -(sequence) 
+--> (modify <rob> ^scheduled 1)
+    (modify <po> ^isscheduled true)
+    (make sequence ^number 2)
+    (write |robot | <na1> | scheduled 1|  | x | <x1> (CRLF))
+)
+
+(p h2
+    { <seq> (sequence ^number <num> ) }
+	{ <rob> (robot  ^name <na1>
+			^position <po1>
+			^scheduled NIL )}
+    { <po>    (pose 	^name <po1> 
+		^x <x1>)}
+	-(pose ^isgoal NIL 
+		^x < <x1>
+		^isscheduled NIL )
+--> (modify <rob> ^scheduled <num>)
+    (modify <po> ^isscheduled true)
+    (modify <seq> ^number (compute <num> + 1))
+    (write |robot | <na1> | scheduled | <num> | x | <x1> (CRLF))
+)
+
+
+
+

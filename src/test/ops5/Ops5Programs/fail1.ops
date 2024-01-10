@@ -1,0 +1,17 @@
+ 
+(literalize student
+        name
+        id
+        maj-code)
+
+(literalize majors
+        major-code
+        major-name)
+
+(p select-major
+        (student ^name <name> ^maj-code < <mc>) 
+        ;fail on line above because comprison with uninitialized atom variable
+        (student ^maj-code <mc>)
+-->
+        (make )
+)
