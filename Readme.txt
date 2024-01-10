@@ -1,3 +1,10 @@
+MemoRete OPS5 is a OPS5 like Interpreter, implementing a custom version of the Rete Algorithm.
+
+State of the project:
+    - experimental use only. Do not use in production
+    - it requires more tests
+    - clearly specify the language
+    - write proper parser based on said specifiaction
 
 Requirements for Program Developement:
     1. Reflection is used in the program. Enable Compiler Flags in your IDE so that the program can use reflection.
