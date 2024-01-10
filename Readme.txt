@@ -3,7 +3,7 @@ MemoRete OPS5 is a OPS5 like Interpreter, implementing a custom version of the R
 State of the project:
     - experimental use only. Do not use in production
     - it requires more tests
-    - clearly specify the language
+    - clearly specify the language, example is in MemoReteOPS5lang.ops
     - write proper parser based on said specifiaction
 
 Requirements for Program Developement:
