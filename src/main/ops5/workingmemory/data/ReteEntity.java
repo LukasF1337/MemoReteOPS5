@@ -152,9 +152,18 @@ public final record ReteEntity(Node node, Object entity, Integer hash, BigIntege
 			}
 		}
 	}
-	
+
 	@Override
 	public String toString() {
-		return this.entity().toString();
+		if (this.entity != null) {
+			return this.entity().toString();
+		} else {
+			return "";
+		}
+	}
+
+	public String toStringWithTime() {
+		return this.toString() + " creationTimeMostLeft: " + this.creationTimeMostLeft + ", creationTime: "
+				+ this.creationTime;
 	}
 }

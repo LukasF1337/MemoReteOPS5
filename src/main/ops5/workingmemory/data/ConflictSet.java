@@ -30,6 +30,7 @@ public class ConflictSet {
 	private HashMap<ReteEntityWrapper, TreeMultiset<ReteEntityWrapper>> conflictSetTracker;
 	// ReteEntity's that already fired
 	private final HashMultiset<ReteEntityWrapper> conflictSetFired = HashMultiset.create();
+	private Integer watchLevel = 0;
 
 	public ConflictSet() {
 		conflictSet = TreeMultiset.create(Strategy.makeComparator(strategy));
@@ -115,6 +116,9 @@ public class ConflictSet {
 		if (this.conflictSet.size() > 0) {
 			ReteEntityWrapper match = this.conflictSet.firstEntry().getElement();
 			res = match.fire(time);
+			if (this.watchLevel >= 1) {
+				System.out.println("Fired " + match.toString());
+			}
 			this.conflictSet.remove(match);
 			ReteEntityWrapper actualReteEntityWrapper = removeFromConflictSetTracker(match);
 			this.conflictSetFired.add(actualReteEntityWrapper);
@@ -122,6 +126,15 @@ public class ConflictSet {
 			res = false;
 		}
 		return res;
+	}
+
+	public void setWatchlevel(Integer watchLevel) {
+		if (watchLevel == 0 || watchLevel == 1) {
+			this.watchLevel = watchLevel;
+		} else {
+			System.out.println("Could not set watchLevel to " + watchLevel.toString());
+			System.out.println("WatchLevel currently restricted to either 0 (default) or 1.");
+		}
 	}
 
 	@Override

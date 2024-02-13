@@ -293,6 +293,10 @@ public class ModelRete {
 	public String printConflictSet() {
 		return this.conflictSet.toString();
 	}
+	
+	public void setWatchLevel(Integer watchLevel) {
+		this.conflictSet.setWatchlevel(watchLevel);
+	}
 
 	private HashSet<Node> expandNode(Node node) {
 		HashSet<Node> visitedNodes = new HashSet<Node>();

@@ -37,7 +37,7 @@ public record ReteEntityWrapper(NodeTermination nodeTerm, ReteEntity reteEntity)
 
 	@Override
 	public String toString() {
-		return "rule " + this.nodeTerm.toString() + ": " + this.reteEntity.toString();
+		return "rule " + this.nodeTerm.toString() + ": " + this.reteEntity.toStringWithTime();
 	}
 
 //	@Override

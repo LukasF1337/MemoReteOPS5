@@ -77,7 +77,16 @@ public class Controller {
 					}
 				}
 			} else if (line.startsWith("watch")) {
-				System.out.println("watch not implemented yet");
+				String[] parts = line.split(" ", 2);
+				if (!parts[0].equals("watch")) {
+					throw new IllegalArgumentException(line);
+				}
+				try {
+					Integer watchlevel = Integer.parseInt(parts[1]);
+					this.modelRete.setWatchLevel(watchlevel);
+				} catch (Exception e) {
+					throw new IllegalArgumentException(line);
+				}
 			} else if (line.startsWith("cs")) {
 				System.out.println(this.modelRete.printConflictSet());
 			} else if (line.startsWith("wm")) {
