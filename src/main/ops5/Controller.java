@@ -50,7 +50,6 @@ public class Controller {
 		} else {
 			line = reader.readLine();
 			line = line.trim();
-			line = line.toLowerCase();
 		}
 
 		// TODO https://www.cs.gordon.edu/local/courses/cs323/OPS5/ops5.html
@@ -91,8 +90,11 @@ public class Controller {
 				System.out.println(this.modelRete.printConflictSet());
 			} else if (line.startsWith("wm")) {
 				System.out.println(this.modelRete.printWorkingMemory());
-			} else if (line.startsWith("matches")) {
-				System.out.println("matches \033[3mrule\033[0m not implemented yet");
+			} else if (line.startsWith("matches ")) {
+				//System.out.println("matches \033[3mrule\033[0m not implemented yet");
+				String[] parts = line.split(" ", 2);
+				String ruleName = parts[1];
+				this.modelRete.printMatchesForRule(ruleName);
 			} else if (line.equals("help")) {
 				printHelpInteractiveCommands();
 			} else if (line.equals("exit")) {
@@ -101,7 +103,6 @@ public class Controller {
 			}
 			line = reader.readLine();
 			line = line.trim();
-			line = line.toLowerCase();
 		}
 	}
 

@@ -293,7 +293,7 @@ public class ModelRete {
 	public String printConflictSet() {
 		return this.conflictSet.toString();
 	}
-	
+
 	public void setWatchLevel(Integer watchLevel) {
 		this.conflictSet.setWatchlevel(watchLevel);
 	}
@@ -329,5 +329,15 @@ public class ModelRete {
 		}
 		strBuilder.append("==========");
 		return strBuilder.toString();
+	}
+
+	public void printMatchesForRule(String ruleName) {
+		NodeTermination termNode = this.terminationNodes.get(ruleName);
+		if (termNode == null) {
+			System.out.println("Rule \"" + ruleName + "\" not found");
+			System.out.println("Available rules:\n" + this.terminationNodes.keySet());
+		} else {
+			termNode.printMatchingForEachCondition();
+		}
 	}
 }

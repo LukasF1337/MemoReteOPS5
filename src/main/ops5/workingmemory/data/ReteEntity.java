@@ -158,7 +158,7 @@ public final record ReteEntity(Node node, Object entity, Integer hash, BigIntege
 		if (this.entity != null) {
 			return this.entity().toString();
 		} else {
-			return "";
+			return "null";
 		}
 	}
 

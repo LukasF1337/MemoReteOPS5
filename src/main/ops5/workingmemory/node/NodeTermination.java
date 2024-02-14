@@ -123,4 +123,8 @@ public final class NodeTermination extends Node {
 	public String toString() {
 		return this.ruleToFire.name();
 	}
+
+	public void printMatchingForEachCondition() {
+		System.out.println(this.processedEntities.toString());
+	}
 }
