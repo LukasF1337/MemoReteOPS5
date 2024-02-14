@@ -125,6 +125,10 @@ public final class NodeTermination extends Node {
 	}
 
 	public void printMatchingForEachCondition() {
-		System.out.println(this.processedEntities.toString());
+		Integer i = 0;
+		for (ReteEntity entity : this.processedEntities) {
+			System.out.println(i.toString() + ". " + entity);
+			i++;
+		}
 	}
 }
